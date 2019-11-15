@@ -1,0 +1,2 @@
+añadir boton con modal para añadir nuevos memes: url y titulo
+añadir evento onclick a las imagenes para cambiar el state y cambie de ruta. muestra titulo la imagen y abajo memes recomendados en miniatura.
