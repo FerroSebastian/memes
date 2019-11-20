@@ -6,71 +6,100 @@ import Modal from './../Modal/Modal';
 
 export default class Top10 extends React.Component {
 
+    constructor() {
+        super();
+        this.state = {
+            titulo: '',
+            url: '',
+            memes: [{
+                url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCV2wfMazqVs_s8XcBfKCZ6093f110oCmvadikuDUrITKo9WSD&s',
+                titulo: 'El Chico Drogado'
+            }, {
+                url: 'https://k38.kn3.net/taringa/6/1/2/9/2/6/3/harrisonloco/550x578_65D.jpg',
+                titulo: 'El Chico Drogado'
+            }, {
+                url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4iu3_jIj9DoK5EdK6kd4-B6iM0Pnb5A0dswZ-5f1YVtYtxaFg&s',
+                titulo: 'El Chico Drogado'
+            }, {
+                url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKzyrKnV-6a8zmixGABvNUHE1k3lXkXcPQN55zU8ULKSgq0ZNU&s',
+                titulo: 'El Chico Drogado'
+            }, {
+                url: 'https://k38.kn3.net/taringa/6/1/2/9/2/6/3/harrisonloco/550x578_65D.jpg',
+                titulo: 'El Chico Drogado'
+            }, {
+                url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCV2wfMazqVs_s8XcBfKCZ6093f110oCmvadikuDUrITKo9WSD&s',
+                titulo: 'El Chico Drogado'
+            }, {
+                url: 'https://media.todojujuy.com/adjuntos/227/imagenes/000/819/0000819631.jpg?0000-00-00-00-00-00',
+                titulo: 'meme7'
+            }]
+        }
+
+    }
+
     
+    
+    agregarUnito() {
+        let memes = this.state.memes;
+        memes.push({
+            url: this.state.url,
+            titulo: this.state.titulo
+        })
+        this.setState({ memes: memes });
+    }
+    handleChange(e){
+        console.log(e.target.name);
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+        console.log(this.state)
+    }
+
+    
+
 
     render() {
         return (
             <div className="container mt-2 border border-danger rounded mb-0 z-depth-4">
                 
-                <Modal />
+            <div className="container mt-2 col-4">
+            <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal">Launch demo modal</button>
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                            <div class="modal-body">
+                                <div className=" mb-3">
+                                    <label htmlFor="title">Título de la Imagen</label>
+                                    <input type="text" id="title" className="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="titulo"  placeholder="titulo" value={this.state.titulo} onChange={(event) => this.handleChange(event)} />
+                                </div>
+                                <br/>
+                                <div className=" mb-3">
+                                    <label htmlFor="uereele">Url de la Imagen</label>
+                                    <input type="text" id="uereele" className="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="url" placeholder="url" value={this.state.url} onChange={(event) => this.handleChange(event)} />
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" onClick={() => this.agregarUnito()}>Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
                 
-                <div className="card-deck mt-4">
-                    <div className="card">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCV2wfMazqVs_s8XcBfKCZ6093f110oCmvadikuDUrITKo9WSD&s" className="card-img-top" alt="..."/>
-                        <div className="card-body">
-                            <h5 className="card-title">El Chico Drogado</h5>
-                            
+                <div className="row">
+                    {this.state.memes.map((item) => (
+                        <div className="col-4 my-2">
+                            <img src={item.url} className="img-fluid" title={item.titulo} />
                         </div>
-                    </div>
-                    <div className="card">
-                        <img src="https://k38.kn3.net/taringa/6/1/2/9/2/6/3/harrisonloco/550x578_65D.jpg" className="card-img-top" alt="..."/>
-                        <div className="card-body">
-                            <h5 className="card-title">El Chico Drogado</h5>
-                            
-                        </div>
-                    </div>
-                    <div className="card">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4iu3_jIj9DoK5EdK6kd4-B6iM0Pnb5A0dswZ-5f1YVtYtxaFg&s" className="card-img-top" alt="..."/>
-                        <div className="card-body">
-                            <h5 className="card-title">El Chico Drogado</h5>
-                            
-                        </div>
-                    </div>
+                    ))}
                 </div>
-                <div className="card-deck">
-                    <div className="card">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKzyrKnV-6a8zmixGABvNUHE1k3lXkXcPQN55zU8ULKSgq0ZNU&s" className="card-img-top" alt="..."/>
-                        <div className="card-body">
-                            <h5 className="card-title">El Chico Drogado</h5>
-                            
-                        </div>
-                    </div>
-                    <div className="card">
-                        <img src="https://k38.kn3.net/taringa/6/1/2/9/2/6/3/harrisonloco/550x578_65D.jpg" className="card-img-top" alt="..."/>
-                        <div className="card-body">
-                            <h5 className="card-title">El Chico Drogado</h5>
-                            
-                        </div>
-                    </div>
-                    <div className="card">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCV2wfMazqVs_s8XcBfKCZ6093f110oCmvadikuDUrITKo9WSD&s" className="card-img-top" alt="..."/>
-                        <div className="card-body">
-                            <h5 className="card-title">El Chico Drogado</h5>
-                            
-                        </div>
-                    </div>
-                    
-                        {this.state.urls.map(function(url, index){
-                            return (
-                                <div className="card">
-                                <img key={index} src={url} className="card-img-top" alt="..."/>
-                                <div className="card-body">
-                                    <h5 className="card-title">El Chico Drogado</h5>
-                                </div>
-                                </div>
-                            );
-                        }, this)}
-                </div>
+                
                 <hr/>
                 <h5><strong>Mas Memes</strong></h5>
                 <hr/>
