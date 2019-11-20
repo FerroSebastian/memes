@@ -4,11 +4,71 @@ import React from 'react';
 
 
 export default class Top10 extends React.Component {
+
+    constructor() {
+        super();
+        this.state = {
+            URLs: []
+        };
+    }
+
+    add() {
+        var title = this.refs.title.value;
+        if(localStorage.getItem('URLs') == null) {
+            var URLs = [];
+            URLs.push(title);
+            localStorage.setItem('URLs', JSON.stringify(URLs));
+        } else {
+            var URLs = JSON.parse(localStorage.getItem('URLs'));
+            URLs.push(title);
+            localStorage.setItem('URLs', JSON.stringify(URLs));
+        }
+        this.setState({
+            URLs: JSON.parse(localStorage.getItem('URLs'))
+        });
+        
+    }
+
     render() {
         return (
             <div className="container mt-2 border border-danger rounded mb-0 z-depth-4">
-                <div className="row"></div>
-                <div className="card-deck">
+                <br/>
+                <button type="button" className="btn btn-dark col" data-toggle="modal" data-target="#exampleModal">Add Meme</button>
+                <br/>
+               
+                <div className="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog" role="document">
+                    <div className="modal-content">
+                    <div className="modal-header">
+                        <h5 className="modal-title" id="exampleModalLabel">Add Meme</h5>
+                        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div className="modal-body">
+                    <form>
+                        <div className="form-row">
+                            <div className="col">
+                                <imput type="text" className="rounded" placeholder="Title..." ref="title" />
+                            </div>
+                            <div className="col">
+                                <imput type="text" placeholder="URL..." />
+                            </div>
+                        </div>
+                    </form>
+                            
+                            
+                    </div>
+                    <div className="modal-footer">
+                        <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" className="btn btn-primary" value="Add"onClick={this.add.bind(this)}>Save changes</button>
+                    </div>
+                    </div>
+                </div>
+                </div>
+                
+                
+                <div className="card-deck mt-4">
                     <div className="card">
                         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCV2wfMazqVs_s8XcBfKCZ6093f110oCmvadikuDUrITKo9WSD&s" className="card-img-top" alt="..."/>
                         <div className="card-body">
@@ -52,6 +112,13 @@ export default class Top10 extends React.Component {
                             <h5 className="card-title">El Chico Drogado</h5>
                             
                         </div>
+                    </div>
+                    <div className="card">
+                        {this.state.URLs.map(function(work, index){
+                            return (
+                                <img key={index} src="{URL}" className="card-img-top" alt="..."/>
+                            );
+                        }, this)}
                     </div>
                 </div>
                 <hr/>
